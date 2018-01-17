@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>node_dash</title>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		
+		function query() {
+			$.ajax({
+		        url: window.location.href + "/block",
+		        type: "GET",
+		        success: function (result) {
+		        	$('#div_block').html(result);
+
+		        },
+		        error: function (xhr, ajaxOptions, thrownError) {}
+		    });
+
+			$.ajax({
+		        url: window.location.href + "/connections",
+		        type: "GET",
+		        success: function (result) {
+		        	$('#div_connections').html(result);
+
+		        },
+		        error: function (xhr, ajaxOptions, thrownError) {}
+		    });
+
+		    $.ajax({
+		        url: window.location.href + "/wallet",
+		        type: "GET",
+		        success: function (result) {
+		        	$('#div_wallet').html(result);
+
+		        },
+		        error: function (xhr, ajaxOptions, thrownError) {}
+		    });
+
+		    setTimeout(function(){ query(); }, 60000);
+		}
+
+		$(document).ready(function() {
+			query();
+		}); 
+	</script>
+	<style>
+		#div_tables {
+			width: 60%;
+			height: auto;
+			min-width: 702px;
+			margin-top: 16px;
+			margin-left: auto;
+			margin-right: auto;
+			text-align: center;
+			font-size: 15px;
+		}
+	</style>
+</head>
+<body style="width: auto; height: auto; background-color: whitesmoke; padding: 0;">
+	<div id="div_tables">
+		<div id="div_block" style="width: 100%; vertical-align: middle;"></div>
+		<div id="div_wallet" style="width: 100%;vertical-align: middle;"></div>
+		<div id="div_connections" style="width: 100%; height: auto; vertical-align: middle;"></div>
+	</div>
+</body>
+</html>
+
+
+
+
+

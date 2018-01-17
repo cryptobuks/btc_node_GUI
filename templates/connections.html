@@ -1,0 +1,21 @@
+<div>
+    <table border="1" style="font-family: Gotham, sans-serif;
+            background: #fcfcfc; width: 100%; height: 100%; margin-left: auto; margin-right: auto;">
+        <tr>
+            <th style="background: #d3d3d3">Id</th>
+            <th style="background: #d3d3d3">Version</th>
+            <th style="background: #d3d3d3">Ip Address</th>
+            <th style="background: #d3d3d3">Last Received</th>
+            <th style="background: #d3d3d3">Synced Blocks</th>
+        </tr>
+    {% for conn in connections_list %}
+        <tr>
+            <td>{{ conn.id }}</td>
+            <td>{{ conn.version }}</td>
+            <td>{{ conn.ip_address }}</td>
+            <td>{{ conn.last_received}}</td>
+            <td>{{ conn.synced_blocks}}</td>
+        </tr>
+    {% endfor %}
+    </table>
+</div>  

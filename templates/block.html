@@ -1,0 +1,23 @@
+<div>
+    <table border="1" style="font-family: Gotham, sans-serif;
+            background: #fcfcfc; width: 100%; height: 100%; margin-left: auto; margin-right: auto;">
+        <tr>
+            <th style="background: #d3d3d3">Height</th>
+            <th style="background: #d3d3d3">Confirmations</th>
+            <th style="background: #d3d3d3">Time</th>
+            <th style="background: #d3d3d3">Median Time</th>
+            <th style="background: #d3d3d3">Weight</th>
+            <th style="background: #d3d3d3">Size</th>
+            <th style="background: #d3d3d3">Stripped Size</th>
+        </tr>
+        <tr>
+            <td>{{ block_dict.height }}</td>
+            <td>{{ block_dict.confirmations }}</td>
+            <td>{{ block_dict.time}}</td>
+            <td>{{ block_dict.mediantime}}</td>
+            <td>{{ block_dict.weight}}</td>
+            <td>{{ block_dict.size}}</td>
+            <td>{{ block_dict.strippedsize}}</td>
+        </tr>
+    </table>
+</div>  
