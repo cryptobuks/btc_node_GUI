@@ -1,8 +1,12 @@
+import json, datetime
 import bitcoin
-import json
 from bitcoin.rpc import *
 
 PROXY = Proxy()
+
+def convert_unixtime(unixtime):
+	time_stamp = datetime.datetime.fromtimestamp(int(unixtime)).strftime('%Y-%m-%d %H:%M:%S')
+	return time_stamp
 
 def get_block_info(block):
 	block_hash = PROXY.call('getblockhash', block)
@@ -14,13 +18,13 @@ def get_best_block_info():
 	block_info = PROXY.call('getblock', best_block_hash)
 
 	block_dict = {
-		'height': block_info['height'],
-		'confirmations': block_info['confirmations'],
-		'time': block_info['time'],
-		'mediantime': block_info['mediantime'],
-		'weight': block_info['weight'],
-		'size': block_info['size'],
-		'strippedsize': block_info['strippedsize']
+		'height': int(block_info['height']),
+		'confirmations': int(block_info['confirmations']),
+		'time': convert_unixtime(block_info['time']),
+		'mediantime': convert_unixtime(block_info['mediantime']),
+		'weight': int(block_info['weight']),
+		'size': int(block_info['size']),
+		'strippedsize': int(block_info['strippedsize'])
 	}
 	return block_dict
 
@@ -36,9 +40,12 @@ def get_connections_info():
 			'id': peer['id'],
 			'version': peer['subver'],
 			'ip_address': peer['addr'],
-			'last_received': peer['lastrecv'],
-			'synced_blocks': peer['synced_blocks']
+			'last_received': convert_unixtime(peer['lastrecv']),
 		}
+		if peer['synced_blocks'] is not -1:
+			peer_dict['synced_blocks'] = peer['synced_blocks']
+		else:
+			peer_dict['synced_blocks'] = 'light client'
 		peers_list.append(peer_dict)
 
 	final_dict['peers'] = peers_list
@@ -71,10 +78,11 @@ def get_transactions():
 			'account': tx['account'],
 			'category': tx['category'],
 			'amount': float(tx['amount']),
-			'time_received': tx['timereceived']
+			'time_received': convert_unixtime(tx['timereceived'])
 		}
 		transactions_list.append(transactions_dict)
 	return transactions_list
 
 if __name__ == '__main__':
-	print(get_wallet_info())
+	#print(get_wallet_info())
+	print(create_new_address('dan'))

@@ -19,7 +19,6 @@ def serve_connections_info():
 @app.route('/node/wallet', methods=['GET'])
 def serve_wallet_info():
 	wallet_dict = func.get_wallet_info()
-	print(wallet_dict)
 	transactions_list = func.get_transactions()
 	return fl.render_template('wallet.html', wallet_dict=wallet_dict, transactions_list=transactions_list)
 
