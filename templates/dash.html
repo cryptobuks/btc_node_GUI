@@ -47,23 +47,37 @@
 		}); 
 	</script>
 	<style>
-		#div_tables {
-			width: 60%;
+		#div_left {
+			width: 40%;
 			height: auto;
 			min-width: 702px;
+			float: left;
 			margin-top: 16px;
-			margin-left: auto;
-			margin-right: auto;
+			margin-left: 16px;
+			margin-right: 0px;
+			text-align: center;
+			font-size: 15px;
+		}
+		#div_right {
+			width: 50%;
+			height: auto;
+			min-width: 702px;
+			float: right;
+			margin-top: 16px;
+			margin-left: 0px;
+			margin-right: 16px;
 			text-align: center;
 			font-size: 15px;
 		}
 	</style>
 </head>
 <body style="width: auto; height: auto; background-color: whitesmoke; padding: 0;">
-	<div id="div_tables">
+	<div id="div_left">
+		<div id="div_wallet" style="width: 100%; vertical-align: middle;"></div>
+	</div>
+	<div id="div_right">
 		<div id="div_block" style="width: 100%; vertical-align: middle;"></div>
-		<div id="div_wallet" style="width: 100%;vertical-align: middle;"></div>
-		<div id="div_connections" style="width: 100%; height: auto; vertical-align: middle;"></div>
+		<div id="div_connections" style="width: 100%; vertical-align: middle;"></div>
 	</div>
 </body>
 </html>
