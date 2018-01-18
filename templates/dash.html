@@ -42,6 +42,29 @@
 		    setTimeout(function(){ query(); }, 60000);
 		}
 
+		function sendTransaction() {
+            $.ajax({
+				url: window.location.href + "/send",
+				type: "POST",
+				data: JSON.stringify({
+					"address": $("#addr_input").val(),
+					"amount": $("#amt_input").val(),
+					"fee": $("#fee_input").val(),
+					"who": $("#who_input").val(),
+					"what": $("#what_input").val()
+				}),
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				success: function (result) {
+					alert("Success!");
+				},
+			    error: function (xhr, ajaxOptions, thrownError) {
+			    	alert(thrownError);
+			    	alert("Aaand it's gone");
+			    }
+			});
+		}
+
 		$(document).ready(function() {
 			query();
 		}); 
@@ -50,7 +73,7 @@
 		#div_left {
 			width: 40%;
 			height: auto;
-			min-width: 702px;
+			min-width: 400px;
 			float: left;
 			margin-top: 16px;
 			margin-left: 16px;
@@ -59,9 +82,9 @@
 			font-size: 15px;
 		}
 		#div_right {
-			width: 50%;
+			width: 55%;
 			height: auto;
-			min-width: 702px;
+			min-width: 600px;
 			float: right;
 			margin-top: 16px;
 			margin-left: 0px;
@@ -74,6 +97,24 @@
 <body style="width: auto; height: auto; background-color: whitesmoke; padding: 0;">
 	<div id="div_left">
 		<div id="div_wallet" style="width: 100%; vertical-align: middle;"></div>
+		<table border="1" style="font-family: Gotham, sans-serif;
+            	background: #fcfcfc; width: 100%; height: 100%; margin-left: auto; margin-right: auto;">
+	        <tr>
+	            <th style="background: #d3d3d3">Amount</th>
+	            <th style="background: #d3d3d3">Fee</th>
+	            <th style="background: #d3d3d3">Who</th>
+	            <th style="background: #d3d3d3">What</th>
+	        </tr>
+	        <tr>
+	            <td><input id="amt_input" type="text" style="width: 95%;"></td>
+	            <td><input id="fee_input" type="text" style="width: 95%;"></td>
+	            <td><input id="who_input" type="text" style="width: 95%;"></td>
+	            <td><input id="what_input" type="text" style="width: 95%;"></td>
+	        </tr>
+	        <tr><th colspan="4" style="background: #d3d3d3">Recipient Address</th></tr>
+	        <tr><td colspan="4"><input id="addr_input" type="text" style="width: 99%;"></td></tr>
+	        <tr><td colspan="4"><button onclick="sendTransaction()" style="width: 100%; background: #f3f3f3;">Send</button></td></tr>
+	    </table>
 	</div>
 	<div id="div_right">
 		<div id="div_block" style="width: 100%; vertical-align: middle;"></div>

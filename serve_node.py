@@ -1,7 +1,7 @@
 import json
 import flask as fl
 from flask import Flask, Response, request
-import node_functions as func
+#import node_functions as func
 
 app = Flask(__name__)
 
@@ -21,6 +21,12 @@ def serve_wallet_info():
 	wallet_dict = func.get_wallet_info()
 	transactions_list = func.get_transactions()
 	return fl.render_template('wallet.html', wallet_dict=wallet_dict, transactions_list=transactions_list)
+
+@app.route('/node/send', methods=['POST'])
+def send_coins():
+	json_data = request.get_json()
+	print(json_data)
+	return '{}'
 
 @app.route('/node', methods=['GET'])
 def serve_dash():

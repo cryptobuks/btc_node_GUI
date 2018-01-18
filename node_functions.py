@@ -51,14 +51,17 @@ def get_connections_info():
 	final_dict['peers'] = peers_list
 	return final_dict
 
+########################################################################################################
 def create_new_address(account):
 	recv_address = PROXY.call('getnewaddress', account)
 	return recv_address
 
-def get_balance(account):
-	acct_balance = PROXY.call('getbalance', account)
-	return acct_balance
+def send_to_address(address, amount, *args, **kwargs):
+	what_comment = args[0]
+	who_comment = args[1]
+	return PROXY.call('sendtoaddress', address, amount, what_comment, who_comment)
 
+########################################################################################################
 def get_wallet_info():
 	wallet_info = PROXY.call('getwalletinfo')
 
@@ -85,4 +88,10 @@ def get_transactions():
 
 if __name__ == '__main__':
 	#print(get_wallet_info())
-	print(create_new_address('dan'))
+	#print(create_new_address('dan'))
+	address = raw_input('address: ')
+	amount = float(input('amount: '))
+	what_comment = raw_input('what for: ')
+	who_comment = raw_input('who to: ')
+
+	send_to_address(address, amount, what_comment, who_comment)
